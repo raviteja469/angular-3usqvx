@@ -6,20 +6,8 @@ import { Component,Input } from '@angular/core';
   styleUrls: ['./svg.component.css']
 })
 export class SvgComponent {
-  @Input() data:any;
- constructor(){}
-  src:any="";
-  dest:any="";
-  trips:any=[];
-  pathString:string="";
-  inUpperLevel:boolean=false;
-  addTrip(){
-    this.trips.push(this.src.toUpperCase()+"-"+this.dest.toUpperCase());
-    this.src="";
-    this.dest="";
-    this.pathString="";
-    
-  }
+ 
+  inputdata:string="";
   fillColor = 'rgb(255, 0, 0)';
   circle: { cx: number, cy:number, r:number , stroke:string}[]=[];
   line:{x1:number,y1:number,x2:number,y2:number , stroke:string}[] = [];
@@ -30,8 +18,8 @@ export class SvgComponent {
   nodes:string[] = ["circle","curved up","curved down","line"];
   textstring:string[] = ["BLR-MAD","MAD-HYD","BLR-HYD","HYB-DEL","HYB-DEL","DEL-BLR"];
   nums:number[] = [0,0,500,500];
-  pathString1:string="M25,50 C40,50 50,30 60,30";
-  pathString2:string="M160,30 C170,30 180,50 190,50";
+  //pathString1:string="M25,50 C40,50 50,30 60,30";
+  //pathString2:string="M160,30 C170,30 180,50 190,50";
   urlArrownone:string="url(#arrownone)";
   urlArrowhead:string="url(#arrowhead)";
   curveUp:string[]=[];
@@ -41,7 +29,8 @@ export class SvgComponent {
   X1:number=20;
   Y1:number=300;
   ini:string="level2";
-  arr:string[]=["circle","line","circle","line arrow","circle","curved down","circle","curved up arrow","circle","line"];
+  //arr:string[]=["circle","line","circle","line arrow","circle","curved down","circle","curved up arrow","circle","line"];
+  arr:string[]=[];
   length:number=40;
   CX1:number=20;
   CX2:number=30;
@@ -62,10 +51,19 @@ export class SvgComponent {
      { cx:10,cy:20,r:0,stroke:this.str}
   ];
   ngOnInit() {
-    this.func(this.arr);
+    
     
   }
-  arrayStarting:string[]=[];  // define array
+  receiveString($event:any){
+    this.inputdata=$event.pathString;
+    this.textstring = $event.trips;
+    let str = this.inputdata;
+    let ar:string[];
+    ar = str.split("-");
+    this.convert(ar);
+    this.func(this.arr);
+  }
+  arrayStarting:string[]=[]; 
   arrayDestination:string[]=[];
   getStart(val:string){
   this.arrayStarting.push(val);
@@ -73,6 +71,53 @@ export class SvgComponent {
   getDestination(val:string){
     this.arrayDestination.push(val);
     }
+  convert(a:string[])
+  {
+   
+    for(let i=0;i<a.length;i++)
+    {
+       if(i==0)
+       {
+         this.arr.push("circle");
+       }
+          if(a[i].toLowerCase().includes("arrow"))
+          {
+             if(a[i].toLowerCase().includes("line"))
+             {
+                 this.arr.push("line arrow");
+             }
+             else if(a[i].toLowerCase().includes("upcurve"))
+             {
+              this.arr.push("curved up arrow");
+             }
+             else if(a[i].toLowerCase().includes("downcurve"))
+             {
+              this.arr.push("curved down arrow");
+             }
+          }
+          else
+          {
+            if(a[i].toLowerCase().includes("line"))
+             {
+                 this.arr.push("line");
+             }
+             else if(a[i].toLowerCase().includes("upcurve"))
+             {
+              this.arr.push("curved up");
+             }
+             else if(a[i].toLowerCase().includes("downcurve"))
+             {
+              this.arr.push("curved down");
+             }
+
+
+          }
+        if(i!=a.length-1)  
+          this.arr.push("circle");
+    }
+  }
+  
+
   func(arr:string[])
   {
     

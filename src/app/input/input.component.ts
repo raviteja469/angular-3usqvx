@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter} from '@angular/core';
+
 
 @Component({
   selector: 'app-input',
@@ -8,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class InputComponent implements OnInit {
   src:string = "";
   dest:string = "";
+  @Output() event = new EventEmitter<{trips:string[],pathString:string}>();
+  
   constructor() { }
+  sendString(){
+    this.event.emit({trips:this.trips,pathString:this.pathString});
    
+  }
   ngOnInit(): void {
   }
   
