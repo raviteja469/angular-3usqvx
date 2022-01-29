@@ -17,7 +17,10 @@ export class SvgComponent {
   endPoint:string="";
   nodes:string[] = ["circle","curved up","curved down","line"];
   textstring:string[] = ["BLR-MAD","MAD-HYD","BLR-HYD","HYB-DEL","HYB-DEL","DEL-BLR"];
-  nums:number[] = [0,0,500,500];
+
+  nums:number[] = [0,0,400,400];
+
+
   //pathString1:string="M25,50 C40,50 50,30 60,30";
   //pathString2:string="M160,30 C170,30 180,50 190,50";
   urlArrownone:string="url(#arrownone)";
@@ -76,10 +79,10 @@ export class SvgComponent {
    
     for(let i=0;i<a.length;i++)
     {
-       if(i==0)
-       {
-         this.arr.push("circle");
-       }
+          if(i==0)
+          {
+              this.arr.push("circle");
+          }
           if(a[i].toLowerCase().includes("arrow"))
           {
              if(a[i].toLowerCase().includes("line"))
@@ -112,8 +115,10 @@ export class SvgComponent {
 
 
           }
-        if(i!=a.length-1)  
-          this.arr.push("circle");
+          if(i!=a.length-1)  
+             this.arr.push("circle");
+          if(a.length-1==0)
+             this.arr.push("circle");   
     }
   }
   

@@ -13,24 +13,101 @@ export class InputComponent implements OnInit {
   
   constructor() { }
   sendString(){
-    this.event.emit({trips:this.trips,pathString:this.pathString});
-   
+    this.buildPathString1();
+    this.event.emit({trips:this.trips,pathString:this.pathMainString});
+    
   }
   ngOnInit(): void {
+    
   }
   
   trips:any=[];
   pathString:string="";
+  pathMainString:string="";
   inUpperLevel:boolean=false;
+  levels:number[]=[];
+  
   addTrip(){
     this.trips.push(this.src.toUpperCase()+"-"+this.dest.toUpperCase());
     this.src="";
     this.dest="";
     this.pathString="";
     this.inUpperLevel=false;
-    this.buildPathString();
+   
   }
-buildPathString(){
+  
+buildPathString1(){
+  
+  if(this.trips.length>1)
+  {
+    for(let i=0;i<this.trips.length-1;i++)
+    {
+        if(this.trips[i].split("-")[0] == this.trips[i+1].split("-")[0] && this.trips[i].split("-")[1] == this.trips[i+1].split("-")[1])
+        {
+          if(i==0)
+          {
+             this.levels.push(2);
+             this.levels.push(2);
+              
+          }else
+          {
+            this.levels.splice(this.levels.length-1, 1);
+            this.levels.push(2);
+            this.levels.push(2);
+          }
+        }
+        else{
+
+          if(this.levels[i]==2)
+          {
+            this.levels.push(1);
+            
+          }
+          else{
+            this.levels.splice(this.levels.length-1, 1);
+            this.levels.push(1);
+            this.levels.push(1);
+          }
+        }
+    }
+  }
+    this.buildMainString();
+}
+buildMainString(){
+  if(this.trips.length>1)
+  {
+    for(let i=0;i<this.trips.length-1;i++){
+      if(this.trips[i].split("-")[0] == this.trips[i+1].split("-")[0] && this.trips[i].split("-")[1] == this.trips[i+1].split("-")[1]){
+          this.pathMainString+="straightLine-";
+      }else if(this.trips[i].split("-")[1] == this.trips[i+1].split("-")[0]){
+        if(this.levels[i]==2 && this.levels[i+1]==1){
+          this.pathMainString+="downCurve-";
+          
+        }else if(this.levels[i]==1 && this.levels[i+1]==1){
+          this.pathMainString+="straightLine-";
+        }else if(this.levels[i]==1 && this.levels[i+1]==2)
+        {
+          this.pathMainString+="upCurve-";
+        }
+      }else if(this.trips[i].split("-")[1] != this.trips[i+1].split("-")[0]){
+        if(this.levels[i]==2 && this.levels[i+1]==1){
+          this.pathMainString+="downCurveArrow-";
+          
+        }else if(this.levels[i]==1 && this.levels[i+1]==1){
+          this.pathMainString+="straightLineArrow-";
+        }else if(this.levels[i]==1 && this.levels[i+1]==2)
+        {
+          this.pathMainString+="upCurveArrow-";
+        }
+      } 
+      
+     }
+
+  }
+  
+
+}  
+/**buildPathString(){
  for(let i=0;i<this.trips.length-1; i++)
  {
     if(this.trips[i]==this.trips[i+1]){
@@ -63,5 +140,5 @@ addCurveToPath(){
   this.pathString = temp + "-" + "upCurve-" + "straightLine-";
   this.inUpperLevel = true;
 
-} 
+} **/
 }
