@@ -9,6 +9,7 @@ import { HeroFormComponent } from './hero-form.component';
 import { heroSwitchComponents } from './hero-switch.components';
 import { SizerComponent } from './sizer.component';
 import { SvgComponent } from './svg.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SvgComponent } from './svg.component';
     ClickDirective,
     ClickDirective2,
     SizerComponent,
-    SvgComponent
+    SvgComponent,
+    InputComponent
   ],
   bootstrap: [ AppComponent ]
 })
