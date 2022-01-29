@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'app-svg',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./svg.component.css']
 })
 export class SvgComponent {
-
+  @Input() data:any;
+ constructor(){}
   src:any="";
   dest:any="";
   trips:any=[];
@@ -28,7 +29,7 @@ export class SvgComponent {
   endPoint:string="";
   nodes:string[] = ["circle","curved up","curved down","line"];
   textstring:string[] = ["BLR-MAD","MAD-HYD","BLR-HYD","HYB-DEL","HYB-DEL","DEL-BLR"];
-  nums:number[] = [0,0,300,300];
+  nums:number[] = [0,0,500,500];
   pathString1:string="M25,50 C40,50 50,30 60,30";
   pathString2:string="M160,30 C170,30 180,50 190,50";
   urlArrownone:string="url(#arrownone)";
@@ -38,7 +39,7 @@ export class SvgComponent {
   curveUpArrow:string[]=[];
   curveDownArrow:string[]=[];
   X1:number=20;
-  Y1:number=250;
+  Y1:number=300;
   ini:string="level2";
   arr:string[]=["circle","line","circle","line arrow","circle","curved down","circle","curved up arrow","circle","line"];
   length:number=40;
