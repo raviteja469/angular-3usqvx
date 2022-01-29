@@ -17,7 +17,7 @@ export class SvgComponent {
     this.src="";
     this.dest="";
     this.pathString="";
-    this.inUpperLevel="";
+    
   }
   fillColor = 'rgb(255, 0, 0)';
   circle: { cx: number, cy:number, r:number , stroke:string}[]=[];
