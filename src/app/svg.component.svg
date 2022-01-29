@@ -1,0 +1,78 @@
+<svg [attr.viewBox]="nums" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+    refX="0" refY="3.5" orient="auto" fill=#ff0000>
+      <polygon points="0 0, 5 3.5, 0 7" />
+    </marker>
+     <marker id="arrownone" markerWidth="10" markerHeight="7" 
+    refX="0" refY="3.5" orient="auto" fill=none>
+      <polygon points="0 0, 5 3.5, 0 7" />
+    </marker>
+  </defs>
+  <text [attr.x]="40" [attr.y]="15" style="font-size:20px">Transport Simple</text>
+  <text [attr.x]="0" [attr.y]="40" style="font-size:10px">Give Starting, Destination Cities in short form(e,g:Bangalore->BLR). </text>
+  <text [attr.x]="20" [attr.y]="70" style="font-size:10px">Starting City -----------Destination City  </text>
+  <foreignObject x="10" y="70" width="100" height="150">
+     <body xmlns="http://www.w3.org/1999/svg">
+     <form>
+       <input type="text" #sta (keyup)="getStart(sta.value)">{{arrayStarting[2]}} 
+     </form>
+     </body>
+  </foreignObject>
+  <foreignObject x="100" y="70" width="100" height="150">
+     <body xmlns="http://www.w3.org/1999/svg">
+     <form>
+       <input type="text" #des (keyup)="getDestination(des.value)">{{arrayDestination[2]}} 
+     </form>
+     </body>
+  </foreignObject>
+  
+  <g *ngFor="let s of arrayStarting">
+     
+  </g>
+  <g *ngFor="let d of arrayDestination">
+     
+  </g> 
+  <g *ngFor="let circle of circles" >
+    <circle  [attr.cx]="circle.cx" [attr.cy]="circle.cy" [attr.r]="circle.r" style="fill:none" [attr.stroke]="circle.stroke" stroke-width="1"/>
+  </g>
+  <g *ngFor="let line of lines">
+    <line [attr.x1]="line.x1" [attr.y1]="line.y1" [attr.x2]="line.x2" [attr.y2]="line.y2"  [attr.marker-end]="urlArrownone" stroke="#0000ff" stroke-width="1"/>
+    </g>
+     <g *ngFor="let line of linesArrow">
+    <line [attr.x1]="line.x1" [attr.y1]="line.y1" [attr.x2]="line.x2" [attr.y2]="line.y2"  [attr.marker-end]="urlArrowhead" stroke="#0000ff" stroke-width="1"/>
+    </g>
+   <g *ngFor="let curup of curveUp">
+     <path [attr.d]="curup"
+     [attr.marker-end]="urlArrownone"
+     style=" stroke:#ff0000;
+                stroke-width:1;
+                fill:none"/>
+   </g>
+   <g *ngFor="let curup of curveUpArrow">
+     <path [attr.d]="curup"
+     [attr.marker-end]="urlArrowhead"
+     style=" stroke:#ff0000;
+                stroke-width:1;
+                fill:none"/>
+   </g>
+   <g *ngFor="let curdown of curveDown">
+     <path [attr.d]="curdown"
+     [attr.marker-end]="urlArrownone"
+     style=" stroke:#ff0000;
+                stroke-width:1;
+                fill:none"
+     />
+   </g>
+   <g *ngFor="let curdown of curveDownArrow">
+     <path [attr.d]="curdown"
+     [attr.marker-end]="urlArrowhead"
+     style=" stroke:#ff0000;
+                stroke-width:1;
+                fill:none"
+     />
+   </g>
+    <g *ngFor="let text of textAdjust">
+     <text [attr.x]="text.tx" [attr.y]="text.ty" style="font-size:7px">{{text.text}}</text></g>  
+     
+</svg>
