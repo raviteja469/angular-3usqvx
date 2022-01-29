@@ -1,5 +1,5 @@
 <div class="input-container">
   <input type="text" [(ngModel)]="src">
   <input type="text" [(ngModel)]="dest">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdHxSS7X2MDOp0P-t7UbCx6kRYxU4dXZCsYEvKYMshngDGzHvQx3h5-4DpCik_5o5yw5U&usqp=CAU">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdHxSS7X2MDOp0P-t7UbCx6kRYxU4dXZCsYEvKYMshngDGzHvQx3h5-4DpCik_5o5yw5U&usqp=CAU" (click)="addTrip()" [disabled]="src == '' || dest =='' ">
 </div>
