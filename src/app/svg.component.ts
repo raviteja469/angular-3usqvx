@@ -6,7 +6,11 @@ import { Component,Input } from '@angular/core';
   styleUrls: ['./svg.component.css']
 })
 export class SvgComponent {
- 
+  
+
+  title1:string="Transport Simple";
+  title2:string="Give Starting, Destination Cities in short form(e,g:Bangalore->BLR).";
+  title3:string="Please add trips before Submitting";
   inputdata:string="";
   fillColor = 'rgb(255, 0, 0)';
   circle: { cx: number, cy:number, r:number , stroke:string}[]=[];
@@ -15,12 +19,12 @@ export class SvgComponent {
   levels:number[]=[1,1,2,2,2,1];
   startPoint:string="MLR";
   endPoint:string="";
-  nodes:string[] = ["circle","curved up","curved down","line"];
-  textstring:string[] = ["BLR-MAD","MAD-HYD","BLR-HYD","HYB-DEL","HYB-DEL","DEL-BLR"];
+  //nodes:string[] = ["circle","curved up","curved down","line"];
+  textstring:string[] = [];
 
   nums:number[] = [0,0,400,400];
 
-
+  
   //pathString1:string="M25,50 C40,50 50,30 60,30";
   //pathString2:string="M160,30 C170,30 180,50 190,50";
   urlArrownone:string="url(#arrownone)";
@@ -58,13 +62,34 @@ export class SvgComponent {
     
   }
   receiveString($event:any){
+    
     this.inputdata=$event.pathString;
     this.textstring = $event.trips;
+    if($event.trips.length>1)
+    {
+      this.Y1 = 200+($event.trips.length)*20;
+      if(this.Y1>this.nums[3])
+      {
+         this.nums[3] = this.nums[3] + 10 + (this.Y1-this.nums[3]);
+        
+      }
+      if( ($event.trips.length) > 6 )
+      {
+          this.nums[2] +=  500; 
+      }
+      
+    }
+    else 
+    {
+      this.Y1 = 200;
+    }
+    
     let str = this.inputdata;
     let ar:string[];
     ar = str.split("-");
     this.convert(ar);
     this.func(this.arr);
+    
   }
   arrayStarting:string[]=[]; 
   arrayDestination:string[]=[];
@@ -117,8 +142,7 @@ export class SvgComponent {
           }
           if(i!=a.length-1)  
              this.arr.push("circle");
-          if(a.length-1==0)
-             this.arr.push("circle");   
+            
     }
   }
   
