@@ -13,9 +13,13 @@
   </defs>
 
 
-  <text [attr.x]="40" [attr.y]="15" style="font-size:20px">Transport Simple</text>
+  <text [attr.x]="40" [attr.y]="15" style="font-size:20px">{{title1}}</text>
 
-  <text [attr.x]="0" [attr.y]="40" style="font-size:10px">Give Starting, Destination Cities in short form(e,g:Bangalore->BLR). </text>
+  <text [attr.x]="0" [attr.y]="40" style="font-size:10px">{{title2}}</text>
+
+  <text [attr.x]="0" [attr.y]="55" style="font-size:10px">{{title3}}</text>
+
+  
 
   
 
