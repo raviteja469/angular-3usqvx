@@ -6,15 +6,10 @@
     (click)="addTrip()"
     [attr.disabled]="src == '' || dest == ''"
   />
-<button (click)="sendString()"     onclick="this.style.display='none'">Submit</button>
-<div *ngFor="let g of levels">
-{{g}}
-</div>
 </div>
 
 <div *ngFor="let t of trips">
   {{ t }}
 </div>
-<div>{{pathMainString}}</div>
-
+<button (click)="sendString()"     onclick="this.style.display='none'">Submit</button>
 
