@@ -68,16 +68,6 @@ export class SvgComponent {
     if($event.trips.length>1)
     {
       this.Y1 = 200+($event.trips.length)*20;
-      if(this.Y1>this.nums[3])
-      {
-         this.nums[3] = this.nums[3] + 10 + (this.Y1-this.nums[3]);
-        
-      }
-      if( ($event.trips.length) > 6 )
-      {
-          this.nums[2] +=  500; 
-      }
-      
     }
     else 
     {
